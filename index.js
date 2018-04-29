@@ -40,35 +40,27 @@ function handleSearchButtonClick() {
   filteredAddresses = dataSet.filter(function(address) {
     var addressState = address.state.toLowerCase();
     var addressCity = address.city.toLowerCase();
-    var addressDate = address.date.toLowerCase();
+    var addressDate = address.date;
     var addressShape = address.shape.toLowerCase();
     var addressCountry = address.country.toLowerCase();
 
 
-   // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
-    if (filterState.length > 0 || filterCity.length > 0 || filterCountry.length > 0 || filterShape.length > 0
-      || filterDate.length > 0) {
-      return addressState === filterState || addressCity === filterCity || addressCountry === filterCountry || 
-      addressShape === filterShape || addressDate === filterDate;
-    }
-    else if (filterCity.length > 0) {
-      return addressCity === filterCity;
-    }
-    else if (filterState.length > 0) {
-      return addressState === filterState;
-    }
-    else if (filterCountry.length > 0) {
-      return addressCountry === filterCountry;
-    }
-    else if (filterShape.length > 0) {
-      return addressShape === filterShape;
-    }
-    else if (filterDate.length > 0) {
+
+    // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+      if (filterDate.length > 0)  {
       return addressDate === filterDate;
-    }
+      }
+      else if (filterState.length > 0 && filterCity.length > 0) {
+      return addressState === filterState && addressCity === filterCity;
+      }
+      else if (filterState.length == 0) {
+      return addressCity === filterCity;
+      }
+      else if (filterCity.length == 0) {
+      return addressState === filterState;
+      }
   });
   renderTable();
 }
-
 // Render the table for the first time on page load
 renderTable();
