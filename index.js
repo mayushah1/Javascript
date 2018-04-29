@@ -3,6 +3,9 @@ var $tbody = document.querySelector("tbody");
 var $stateInput = document.querySelector("#state");
 var $searchBtn = document.querySelector("#search");
 var $cityInput = document.querySelector("#city");
+var $dateInput = document.querySelector("#date");
+var $countryInput = document.querySelector("#country");
+var $shapeInput = document.querySelector("#shape");
 
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
 $searchBtn.addEventListener("click", handleSearchButtonClick);
@@ -36,7 +39,7 @@ function handleSearchButtonClick() {
   var filterCountry = $countryInput.value.trim().toLowerCase();
   var filterShape = $shapeInput.value.trim().toLowerCase();
 
-  // Set filteredAddresses to an array of all addresses whose "state" matches the filter
+  // // Set filteredAddresses to an array of all addresses whose "details" matche the filter
   filteredAddresses = dataSet.filter(function(address) {
     var addressState = address.state.toLowerCase();
     var addressCity = address.city.toLowerCase();
@@ -46,21 +49,16 @@ function handleSearchButtonClick() {
 
 
 
-    // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
-      if (filterDate.length > 0)  {
-      return addressDate === filterDate;
-      }
-      else if (filterState.length > 0 && filterCity.length > 0) {
-      return addressState === filterState && addressCity === filterCity;
-      }
-      else if (filterState.length == 0) {
-      return addressCity === filterCity;
-      }
-      else if (filterCity.length == 0) {
-      return addressState === filterState;
-      }
-  });
+// filtering the columns
+    var filteredFields =
+     ((filterDate === "" || addressDate === filterDate) &&
+     (filterCity === "" || addressCity === filterCity) &&
+     (filterState === "" || addressState === filterState) &&
+     (filterCountry === "" || addressCountry === filterCountry) &&
+     (filterShape === "" || addressShape === filterShape));
+   return filteredFields;
+ });
   renderTable();
 }
-// Render the table for the first time on page load
+// // Render the table for the first time on page load
 renderTable();
