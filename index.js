@@ -43,7 +43,7 @@ function handleSearchButtonClick() {
   filteredAddresses = dataSet.filter(function(address) {
     var addressState = address.state.toLowerCase();
     var addressCity = address.city.toLowerCase();
-    var addressDate = address.date;
+    var addressDate = address.date.toLowerCase();
     var addressShape = address.shape.toLowerCase();
     var addressCountry = address.country.toLowerCase();
 
